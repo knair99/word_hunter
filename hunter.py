@@ -2,10 +2,7 @@
 Solve the word hunt challenge
 '''
 import sys
-
-#CONSTANTS
 dir_map = {'DIAG_LEFT_DOWN': (1, -1), 'RIGHT': (0, 1), 'DIAG_RIGHT_DOWN': (1, 1), 'UP': (-1, 0), 'DOWN': (1, 0), 'DIAG_RIGHT_UP': (-1, 1), 'DIAG_LEFT_UP': (-1, -1), 'LEFT': (0, -1)}
-
 
 def build_frequency_table(word_maze):
 	freq_table = {}
@@ -58,8 +55,6 @@ def grid_solver_impl(word_maze, word_to_find, start_position, solve_backwards):
 				break
 	return False, 'NONE'
 
-
-
 def grid_solver(word_maze, word_list, freq_table):
 	for word_to_find in word_list:
 		solve_backwards = False
@@ -76,8 +71,6 @@ def grid_solver(word_maze, word_list, freq_table):
 			if found == True:
 				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
 				break
-
-
 
 def main():
 	print 'Usage: hunter.py [MAZE_FILENAME] [WORDS_TO_FIND_FILENAME]'
