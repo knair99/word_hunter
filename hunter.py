@@ -49,7 +49,6 @@ def grid_solver_impl(word_maze, word_to_find, start_position, solve_backwards):
 		for l_index, letter in enumerate(word_to_find):
 			if (0 <= cur_col < max_cols) and (0 <= cur_row < max_rows):
 				if letter == word_maze[cur_row][cur_col]:
-					#print 'Found letter', letter, 'at ', cur_row, cur_col
 					if l_index == length_of_word:
 						return True, direction
 					cur_row = cur_row + row_offset
@@ -63,25 +62,25 @@ def grid_solver_impl(word_maze, word_to_find, start_position, solve_backwards):
 
 
 def grid_solver(word_maze, word_list, freq_table):
-	solve_backwards = False
+	
 	for word_to_find in word_list:
-		print 'Finding', word_to_find
+		solve_backwards = False
+
 		start_letter = word_to_find[0]
 		end_letter = word_to_find[-1]
-		if freq_table[start_letter] > freq_table[end_letter]:
+		if freq_table[start_letter]['count'] > freq_table[end_letter]['count']:
 			letter = end_letter
 			solve_backwards = True
 		else:
 			letter = start_letter
 		
 		positions = freq_table[letter]['positions']
-		#print 'Checking for letter:', letter
 		for each_position in positions:
-			#print 'Checking position:', each_position
 			found, direction = grid_solver_impl(word_maze, word_to_find, each_position, solve_backwards)
 			if found == True:
 				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
 				break
+
 
 
 def main():
