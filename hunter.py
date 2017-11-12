@@ -3,53 +3,102 @@ Solve the word hunt challenge
 '''
 import sys
 
+#CONSTANTS
+dir_map = {'DIAG_LEFT_DOWN': (1, -1), 'RIGHT': (0, 1), 'DIAG_RIGHT_DOWN': (1, 1), 'UP': (-1, 0), 'DOWN': (1, 0), 'DIAG_RIGHT_UP': (-1, 1), 'DIAG_LEFT_UP': (-1, -1), 'LEFT': (0, -1)}
+
+
 def build_frequency_table(word_maze):
 	freq_table = {}
-	for row in word_maze:
-		for col in row:
+	for row_index, row in enumerate(word_maze):
+		for col_index, col in enumerate(row):
 			if col not in freq_table:
-				freq_table[col] = 1
+				freq_table[col] = {'count' : 1, 'positions' : [(row_index, col_index)]}
 			else:
-				freq_table[col] += 1
+				freq_table[col]['count'] += 1
+				freq_table[col]['positions'].append((row_index, col_index))
 	return freq_table
 
 def get_maze_from_file(filename):
 	with open(filename) as input_file:
 		file_contents = input_file.readlines()
-		#Take off new lines
 		file_contents = [x.strip() for x in file_contents]
 		word_maze = []
-		#Convert to list of lists
 		for each in file_contents:
 			row = each.split()
 			word_maze.append(row)
+		SIZE = len(word_maze[0])
 		return word_maze
 
 def get_words_to_find_from_file(filename):
 	with open(filename) as input_file:
 		file_contents = input_file.readlines()
-		#Take off new lines
 		words_to_find = [x.strip() for x in file_contents]
 		return words_to_find
 
+def grid_solver_impl(word_maze, word_to_find, start_position, solve_backwards):
+	max_cols, max_rows = len(word_maze[0]), len(word_maze)
+	if solve_backwards == True:
+		word_to_find = word_to_find[::-1]
+	letter = word_to_find[0]
+	length_of_word = len(word_to_find) - 1
+
+	for direction in dir_map:
+		dir_offsets = dir_map[direction]
+		row_offset, col_offset = dir_offsets[0], dir_offsets[1]
+		cur_row, cur_col = start_position[0], start_position[1]
+		for l_index, letter in enumerate(word_to_find):
+			if (0 <= cur_col < max_cols) and (0 <= cur_row < max_rows):
+				if letter == word_maze[cur_row][cur_col]:
+					#print 'Found letter', letter, 'at ', cur_row, cur_col
+					if l_index == length_of_word:
+						return True, direction
+					cur_row = cur_row + row_offset
+					cur_col = cur_col + col_offset
+				else:
+					break
+			else:
+				break
+	return False, 'NONE'
+
+
+
+def grid_solver(word_maze, word_list, freq_table):
+	solve_backwards = False
+	for word_to_find in word_list:
+		print 'Finding', word_to_find
+		start_letter = word_to_find[0]
+		end_letter = word_to_find[-1]
+		if freq_table[start_letter] > freq_table[end_letter]:
+			letter = end_letter
+			solve_backwards = True
+		else:
+			letter = start_letter
+		
+		positions = freq_table[letter]['positions']
+		#print 'Checking for letter:', letter
+		for each_position in positions:
+			#print 'Checking position:', each_position
+			found, direction = grid_solver_impl(word_maze, word_to_find, each_position, solve_backwards)
+			if found == True:
+				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
+				break
+
 
 def main():
-	print 'Usage: word_hunter.py [MAZE_FILENAME] [WORDS_TO_FIND_FILENAME]'
+	print 'Usage: hunter.py [MAZE_FILENAME] [WORDS_TO_FIND_FILENAME]'
 	
 	if len(sys.argv) <= 2:
-		print 'No input given - using examples'
-		maze_filename 	= 'maze.txt'
-		words_filename 	= 'words.txt'
+		print 'Missing input maze file and/or words file'
+		print ' - using default examples'
+		maze_filename, words_filename = 'maze.txt', 'words.txt'
 
 	else:
-		maze_filename 	= sys.argv[1]
-		words_filename 	= sys.argv[2]
+		maze_filename, words_filename = sys.argv[1], sys.argv[2]
 
 	word_maze = get_maze_from_file(maze_filename)
 	word_list = get_words_to_find_from_file(words_filename)
-	print word_list
 	freq_table = build_frequency_table(word_maze)
-
+	grid_solver(word_maze, word_list, freq_table)
 
 
 
