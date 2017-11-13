@@ -75,7 +75,6 @@ def grid_solver(word_maze, word_list, freq_table):
 			found, direction = grid_solver_impl(word_maze, word_to_find, each_position, False)
 			if found == True:
 				words_not_found.remove(word_to_find)
-				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
 				word_to_find = word_to_find.encode('ascii', 'ignore')
 				word_answers[word_to_find] = { 
 					'word' : word_to_find,
@@ -126,15 +125,12 @@ def construct_new_maze(word_maze, word_answers):
 	return answer_list
 
 def start(word_maze, word_list):
-		
 	#word_maze = get_maze_from_file('new_maze.txt')
 	#word_list = get_words_to_find_from_file('new_words.txt')
 	freq_table = build_frequency_table(word_maze)
 	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
-	if len(words_not_found) != 0:
-		print 'Words not found = ', words_not_found
 	new_maze = construct_new_maze(word_maze, word_answers)
-	return words_not_found, word_answers, new_maze
+	return words_not_found, word_answers, new_maze, dir_map_colors
 
 
 #start(None, None)

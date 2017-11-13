@@ -72,7 +72,7 @@
 
   <!--output-->
    <div>
-        <div class="container">
+        <div class="container" id='solution_header'>
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
@@ -83,7 +83,6 @@
     </div>
   <div>
     <br>
-    <hr/> 
     <br>
         <div class="container" id='output_container'>
             <div class="row">
@@ -99,7 +98,15 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                  
+                   <div class="table-responsive">
+                        <table class="table" id='meta_table'>
+                            <thead>
+                            </thead>
+                            <tbody id='meta_table_body'>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,6 +118,8 @@
     $(function(){
 
       $('#output_table').hide();
+      $('#meta_table').hide();
+      $('#solution_header').hide();
 
       //Stop form from navigating away
       $('#puzzle_form').submit(function(event){
@@ -124,15 +133,17 @@
                 type: 'POST',
                 success: function(response) {
                     $('#output_table').show();
+                    $('#meta_table').show();
                     $('#output_table_body').empty();
+                    $('#meta_table_body').empty();
 
                     var words_not_found = response.words_not_found;
                     var word_answers = response.word_answers;
-                    var word_maze = response.word_maze;
                     var new_maze = response.new_maze;
+                    var dir_colors = response.dir_colors;
                     var trHTML;
 
-                    //Set up the table
+                    //Set up the solution table
                     for(var row in new_maze){
                       line = new_maze[row]
                       trHTML = '<tr>'
@@ -144,6 +155,15 @@
                       $('#output_table_body').append(trHTML)
                     }
 
+                    //Set up meta data:
+                    for (var color in dir_colors){
+                      details = dir_colors[color];
+                      console.log(details);
+                      trHTML = '<tr>'
+                      trHTML = trHTML +'<td' + ' BGCOLOR= "' + details[1] + '">' + details[0] + '</td>'
+                      trHTML += '</tr>'
+                      $('#meta_table_body').append(trHTML)
+                    }
 
                   },
                 error: function(error) {
