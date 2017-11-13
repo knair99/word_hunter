@@ -86,7 +86,7 @@
     <br>
         <div class="container" id='output_container'>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="table-responsive">
                         <table class="table" id='output_table'>
                             <thead>
@@ -97,7 +97,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                  <h3 id='color_map_title'> Color Map </h3>
                    <div class="table-responsive">
                         <table class="table" id='meta_table'>
                             <thead>
@@ -120,6 +121,7 @@
       $('#output_table').hide();
       $('#meta_table').hide();
       $('#solution_header').hide();
+      $('#color_map_title').hide();
 
       //Stop form from navigating away
       $('#puzzle_form').submit(function(event){
@@ -134,13 +136,14 @@
                 success: function(response) {
                     $('#output_table').show();
                     $('#meta_table').show();
+                    $('#color_map_title').show();
                     $('#output_table_body').empty();
                     $('#meta_table_body').empty();
 
                     var words_not_found = response.words_not_found;
                     var word_answers = response.word_answers;
                     var new_maze = response.new_maze;
-                    var dir_colors = response.dir_colors;
+                    var dir_colors = JSON.parse(response.dir_colors);
                     var trHTML;
 
                     //Set up the solution table
@@ -158,16 +161,15 @@
                     //Set up meta data:
                     for (var color in dir_colors){
                       details = dir_colors[color];
-                      console.log(details);
                       trHTML = '<tr>'
-                      trHTML = trHTML +'<td' + ' BGCOLOR= "' + details[1] + '">' + details[0] + '</td>'
+                      trHTML = trHTML +'<td' + ' BGCOLOR= "' + details + '">' + color + '</td>'
                       trHTML += '</tr>'
                       $('#meta_table_body').append(trHTML)
                     }
 
                   },
                 error: function(error) {
-                  alert(error);
+                  alert('An error occurred in your formatting - Check demo page');
                 }
 
               });//end of ajax call
