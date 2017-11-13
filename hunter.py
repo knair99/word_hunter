@@ -56,6 +56,7 @@ def grid_solver_impl(word_maze, word_to_find, start_position, solve_backwards):
 	return False, 'NONE'
 
 def grid_solver(word_maze, word_list, freq_table):
+	words_not_found = word_list[:]
 	for word_to_find in word_list:
 		solve_backwards = False
 		start_letter = word_to_find[0]
@@ -69,8 +70,11 @@ def grid_solver(word_maze, word_list, freq_table):
 		for each_position in positions:
 			found, direction = grid_solver_impl(word_maze, word_to_find, each_position, solve_backwards)
 			if found == True:
+				words_not_found.remove(word_to_find)
 				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
 				break
+
+	return words_not_found
 
 def main():
 	print 'Usage: hunter.py [MAZE_FILENAME] [WORDS_TO_FIND_FILENAME]'
@@ -80,11 +84,13 @@ def main():
 		maze_filename, words_filename = 'maze.txt', 'words.txt'
 	else:
 		maze_filename, words_filename = sys.argv[1], sys.argv[2]
+	
 	word_maze = get_maze_from_file(maze_filename)
 	word_list = get_words_to_find_from_file(words_filename)
 	freq_table = build_frequency_table(word_maze)
-	grid_solver(word_maze, word_list, freq_table)
-
+	words_not_found = grid_solver(word_maze, word_list, freq_table)
+	if len(words_not_found) != 0:
+		print 'Words not found = ', words_not_found
 
 
 #system
