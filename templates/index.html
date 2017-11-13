@@ -71,6 +71,16 @@
   </form>
 
   <!--output-->
+   <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Solution</h1></div>
+                </div>
+            </div>
+        </div>
+    </div>
   <div>
     <br>
     <hr/> 
@@ -88,7 +98,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                  
+                </div>
             </div>
         </div>
     </div>
@@ -111,7 +123,6 @@
                 data: $('#puzzle_form').serialize(),
                 type: 'POST',
                 success: function(response) {
-                    console.log(response);
                     $('#output_table').show();
                     $('#output_table_body').empty();
 
@@ -127,23 +138,16 @@
                       trHTML = '<tr>'
                         for (var each_letter in line){
                             var details = line[each_letter];
-                            console.log(details)
                             trHTML = trHTML +'<td' + ' BGCOLOR= "' + details.color + '">' + details.letter + '</td>'
                       }
                       trHTML += '</tr>'
-                      console.log(trHTML);
                       $('#output_table_body').append(trHTML)
-                    }
-
-                    //Now color in the answers:
-                    for (var word in word_answers){
-
                     }
 
 
                   },
                 error: function(error) {
-                    console.log(error);
+                  alert(error);
                 }
 
               });//end of ajax call

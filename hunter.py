@@ -68,7 +68,7 @@ def grid_solver(word_maze, word_list, freq_table):
 			solve_backwards = True
 		else:
 			letter = start_letter
-			
+
 		positions = freq_table[start_letter]['positions']
 
 		for each_position in positions:
@@ -114,39 +114,23 @@ def construct_new_maze(word_maze, word_answers):
 		row_offset, col_offset = direction_offsets[0], direction_offsets[1]
 		answer_dict = answer_list[row][col]
 		
-		#print answer_dict
 		answer_list[row][col]['color'] = color
 
 		#color in the direction for as long as length
 		for i in range(0, length-1): #BUG: This is for sure a bug
 			row = row + row_offset
 			col = col + col_offset
-			#print row, col, direction
 			answer_list[row][col]['color'] = color
-			print answer_list[row][col]
 		each_answer_dict = answer_dict
-		
-
-	for a in answer_list:
-		for b in a:
-			print b
-
-	# for row in answer_list:
-	# 	for col in row:
-	# 		for k, v in col.items():
-	# 			print k
-	# 			print v
 
 	return answer_list
 
 def start(word_maze, word_list):
-		
 	#word_maze = get_maze_from_file('new_maze.txt')
 	#word_list = get_words_to_find_from_file('new_words.txt')
 	freq_table = build_frequency_table(word_maze)
 	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
 	if len(words_not_found) != 0:
-		print 'Words not found = ', words_not_found
 	new_maze = construct_new_maze(word_maze, word_answers)
 	return words_not_found, word_answers, new_maze
 
