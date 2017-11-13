@@ -79,10 +79,8 @@
                         <table class="table" id='output_table'>
                             <thead>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Output</td>
-                                </tr>
+                            <tbody id='output_table_body'>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -99,6 +97,7 @@
 
       $('#output_table').hide();
 
+      //Stop form from navigating away
       $('#puzzle_form').submit(function(event){
           event.preventDefault();
       });
@@ -111,6 +110,15 @@
                 success: function(response) {
                     console.log(response);
                     $('#output_table').show();
+
+                    var words_not_found = response.words_not_found;
+                    var word_answers = response.word_answers;
+                    var word_maze = response.word_maze;
+
+                    for(var word in word_maze){
+                        console.log(answer.letters);
+                    }
+
                   },
                 error: function(error) {
                     console.log(error);

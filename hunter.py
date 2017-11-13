@@ -56,6 +56,7 @@ def grid_solver_impl(word_maze, word_to_find, start_position, solve_backwards):
 	return False, 'NONE'
 
 def grid_solver(word_maze, word_list, freq_table):
+	word_answers = {}
 	words_not_found = word_list[:]
 	for word_to_find in word_list:
 		solve_backwards = False
@@ -72,27 +73,29 @@ def grid_solver(word_maze, word_list, freq_table):
 			if found == True:
 				words_not_found.remove(word_to_find)
 				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
+				word_to_find = word_to_find.encode('ascii', 'ignore')
+				word_answers[word_to_find] = { 
+					'word' : word_to_find,
+					'x_position': each_position[0],
+					'y_position': each_position[1],
+					'direction' : direction,
+					'length' : len(word_to_find),
+					'letters' : list(word_to_find)
+					}
 				break
 
-	return words_not_found
+	return words_not_found, word_answers
 
-def main():
-	print 'Usage: hunter.py [MAZE_FILENAME] [WORDS_TO_FIND_FILENAME]'
-	if len(sys.argv) <= 2:
-		print 'Missing input maze file and/or words file'
-		print ' - using default examples'
-		maze_filename, words_filename = 'maze.txt', 'words.txt'
-	else:
-		maze_filename, words_filename = sys.argv[1], sys.argv[2]
-	
-	word_maze = get_maze_from_file(maze_filename)
-	word_list = get_words_to_find_from_file(words_filename)
+def start(word_maze, word_list):
+		
+	#word_maze = get_maze_from_file('new_maze.txt')
+	#word_list = get_words_to_find_from_file('new_words.txt')
+	#print word_maze, word_list
 	freq_table = build_frequency_table(word_maze)
-	words_not_found = grid_solver(word_maze, word_list, freq_table)
+	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
 	if len(words_not_found) != 0:
 		print 'Words not found = ', words_not_found
+	return words_not_found, word_answers
 
 
-#system
-if __name__ == '__main__':
-    sys.exit(main())
+#start(None, None)

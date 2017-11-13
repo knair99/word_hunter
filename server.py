@@ -4,6 +4,7 @@ Write a mini server to service word hunt challenge
 
 from flask import Flask, flash, redirect, render_template, request, session, abort, jsonify
 import json
+import hunter as wh
  
 app = Flask(__name__)
  
@@ -18,9 +19,24 @@ def post_puzzle():
 	print request.form
 	print request.data
 
+	text_area_maze = request.form['maze_text_area']
+	word_maze = text_area_maze.split('\r\n') 
+	word_maze = [ ''.join(x.split()) for x in word_maze]
+	print word_maze
+	word_maze = [list(x) for x in word_maze]
+
+	text_area_words = request.form['words_text_area']
+	word_list = text_area_words.split('\r\n')
+	print word_list
+
+	#now call into solver
+	words_not_found, word_answers = wh.start(word_maze, word_list)
+
 	#Send data back
 	web_response = {}
-	web_response['solved'] = ['hello', 'list']
+	web_response['word_maze'] = word_maze
+	web_response['words_not_found'] = words_not_found
+	web_response['word_answers'] = word_answers
 	return jsonify(web_response)
 
 
