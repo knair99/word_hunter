@@ -117,20 +117,28 @@
                     var words_not_found = response.words_not_found;
                     var word_answers = response.word_answers;
                     var word_maze = response.word_maze;
+                    var new_maze = response.new_maze;
                     var trHTML;
 
-                    for(var word in word_maze){
-                      line = word_maze[word]
-                      console.log(line);
+                    //Set up the table
+                    for(var row in new_maze){
+                      line = new_maze[row]
                       trHTML = '<tr>'
                         for (var each_letter in line){
-                          console.log(each_letter)
-                            trHTML = trHTML +'<td>' + line[each_letter] + '</td>'
+                            var details = line[each_letter];
+                            console.log(details)
+                            trHTML = trHTML +'<td' + ' BGCOLOR= "' + details.color + '">' + details.letter + '</td>'
                       }
                       trHTML += '</tr>'
                       console.log(trHTML);
                       $('#output_table_body').append(trHTML)
                     }
+
+                    //Now color in the answers:
+                    for (var word in word_answers){
+
+                    }
+
 
                   },
                 error: function(error) {

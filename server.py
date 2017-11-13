@@ -25,13 +25,14 @@ def post_puzzle():
 	word_list = text_area_words.split('\r\n')
 
 	#now call into solver
-	words_not_found, word_answers = wh.start(word_maze, word_list)
+	words_not_found, word_answers, new_maze = wh.start(word_maze, word_list)
 
 	#Send data back
 	web_response = {}
 	web_response['word_maze'] = word_maze
 	web_response['words_not_found'] = words_not_found
 	web_response['word_answers'] = word_answers
+	web_response['new_maze'] = new_maze
 	return jsonify(web_response)
 
 
