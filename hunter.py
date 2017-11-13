@@ -126,11 +126,13 @@ def construct_new_maze(word_maze, word_answers):
 	return answer_list
 
 def start(word_maze, word_list):
+		
 	#word_maze = get_maze_from_file('new_maze.txt')
 	#word_list = get_words_to_find_from_file('new_words.txt')
 	freq_table = build_frequency_table(word_maze)
 	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
 	if len(words_not_found) != 0:
+		print 'Words not found = ', words_not_found
 	new_maze = construct_new_maze(word_maze, word_answers)
 	return words_not_found, word_answers, new_maze
 
