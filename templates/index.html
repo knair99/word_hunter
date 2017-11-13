@@ -113,6 +113,7 @@
                 success: function(response) {
                     console.log(response);
                     $('#output_table').show();
+                    $('#output_table_body').empty();
 
                     var words_not_found = response.words_not_found;
                     var word_answers = response.word_answers;

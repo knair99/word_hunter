@@ -3,6 +3,7 @@ Solve the word hunt challenge
 '''
 import sys
 dir_map = {'DIAG_LEFT_DOWN': (1, -1), 'RIGHT': (0, 1), 'DIAG_RIGHT_DOWN': (1, 1), 'UP': (-1, 0), 'DOWN': (1, 0), 'DIAG_RIGHT_UP': (-1, 1), 'DIAG_LEFT_UP': (-1, -1), 'LEFT': (0, -1)}
+dir_map_colors = {'DIAG_LEFT_DOWN': 'blue', 'RIGHT': 'green', 'DIAG_RIGHT_DOWN': 'yellow', 'UP': 'pink', 'DOWN': 'purple', 'DIAG_RIGHT_UP': 'gold', 'DIAG_LEFT_UP': 'red', 'LEFT': 'skyblue'}
 
 def build_frequency_table(word_maze):
 	freq_table = {}
@@ -67,9 +68,11 @@ def grid_solver(word_maze, word_list, freq_table):
 			solve_backwards = True
 		else:
 			letter = start_letter
-		positions = freq_table[letter]['positions']
+			
+		positions = freq_table[start_letter]['positions']
+
 		for each_position in positions:
-			found, direction = grid_solver_impl(word_maze, word_to_find, each_position, solve_backwards)
+			found, direction = grid_solver_impl(word_maze, word_to_find, each_position, False)
 			if found == True:
 				words_not_found.remove(word_to_find)
 				print 'Found word', word_to_find, 'at position: ', each_position, 'in direction: ', direction
@@ -106,19 +109,20 @@ def construct_new_maze(word_maze, word_answers):
 		col = each_answer_dict['col_position']
 		direction = each_answer_dict['direction']
 		direction_offsets = dir_map[direction]
+		color = dir_map_colors[direction]
 		length = each_answer_dict['length']
 		row_offset, col_offset = direction_offsets[0], direction_offsets[1]
 		answer_dict = answer_list[row][col]
 		
 		#print answer_dict
-		answer_dict['color'] = 'yellow'
+		answer_list[row][col]['color'] = color
 
 		#color in the direction for as long as length
-		for i in range(0, length-1):
+		for i in range(0, length-1): #BUG: This is for sure a bug
 			row = row + row_offset
 			col = col + col_offset
 			#print row, col, direction
-			answer_list[row][col]['color'] = 'yellow'
+			answer_list[row][col]['color'] = color
 			print answer_list[row][col]
 		each_answer_dict = answer_dict
 		
@@ -137,8 +141,8 @@ def construct_new_maze(word_maze, word_answers):
 
 def start(word_maze, word_list):
 		
-	word_maze = get_maze_from_file('new_maze.txt')
-	word_list = get_words_to_find_from_file('new_words.txt')
+	#word_maze = get_maze_from_file('new_maze.txt')
+	#word_list = get_words_to_find_from_file('new_words.txt')
 	freq_table = build_frequency_table(word_maze)
 	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
 	if len(words_not_found) != 0:
