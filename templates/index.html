@@ -4,18 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Word hunt solver</title>
-    <!--bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script
+        
+    <!-- Bootstrap core CSS -->
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  
+     <script
       src="https://code.jquery.com/jquery-1.12.4.min.js"
       integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
       crossorigin="anonymous"> 
       </script>    
-
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -42,17 +42,16 @@
         </div>
     </div>
 
-    <form action="/post_puzzle" method="POST" id ="puzzle_form">
+    <!--form - user input-->
+    <form action="/post_puzzle" method="POST" id ="puzzle_form" role='form'>
       <div>
         <div class="container">
           <div class="row">
             <div class="col-md-6">
-              <textarea form="puzzle_form" rows="10" cols="20" name="maze_text_area" placeholder="Enter maze here" maxlength="4000" minlength="9" style="margin:0px;width:350px;height:350px;padding:2px;">
-              </textarea>
+              <textarea form="puzzle_form" rows="10" cols="20" name="maze_text_area" placeholder="Enter maze here" maxlength="4000" minlength="9" style="margin:0px;width:350px;height:350px;padding:2px;"></textarea>
             </div>
             <div class="col-md-6">
-              <textarea form="puzzle_form" rows="10" cols="20" name="words_text_area" placeholder="Enter words to find" maxlength="4000" minlength="9" style="margin:0px;width:350px;height:350px;padding:2px;">
-              </textarea>
+              <textarea form="puzzle_form" rows="10" cols="20" name="words_text_area" placeholder="Enter words to find" maxlength="4000" minlength="9" style="margin:0px;width:350px;height:350px;padding:2px;"></textarea>
             </div>
           </div>
         </div>
@@ -71,6 +70,57 @@
     </div>
   </form>
 
+  <!--output-->
+  <div>
+        <div class="container" id='output_container'>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table" id='output_table'>
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Output</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </div>
+
+
+  <!--javascript-->
+  <script type="text/javascript">
+    $(function(){
+
+      $('#output_table').hide();
+
+      $('#puzzle_form').submit(function(event){
+          event.preventDefault();
+      });
+      
+       $('#solve_button').click(function(){
+        $.ajax({
+                url: '/post_puzzle',
+                data: $('#puzzle_form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                    $('#output_table').show();
+                  },
+                error: function(error) {
+                    console.log(error);
+                }
+
+              });//end of ajax call
+      
+      });//end of solve button ajax
+    
+    }); //end of $(function)
 
   </script>
     

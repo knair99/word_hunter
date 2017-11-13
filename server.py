@@ -2,7 +2,8 @@
 Write a mini server to service word hunt challenge
 '''
 
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, jsonify
+import json
  
 app = Flask(__name__)
  
@@ -14,9 +15,13 @@ def index():
 #Handle post request from user here
 @app.route('/post_puzzle', methods=['POST'])
 def post_puzzle():
-	print request.data
 	print request.form
-	return "hello from post_puzzle"
+	print request.data
+
+	#Send data back
+	web_response = {}
+	web_response['solved'] = ['hello', 'list']
+	return jsonify(web_response)
 
 
 if __name__ == '__main__':
