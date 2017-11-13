@@ -72,6 +72,9 @@
 
   <!--output-->
   <div>
+    <br>
+    <p> -------------------- </p>
+    <br>
         <div class="container" id='output_container'>
             <div class="row">
                 <div class="col-md-6">
@@ -114,9 +117,19 @@
                     var words_not_found = response.words_not_found;
                     var word_answers = response.word_answers;
                     var word_maze = response.word_maze;
+                    var trHTML;
 
                     for(var word in word_maze){
-                        console.log(answer.letters);
+                      line = word_maze[word]
+                      console.log(line);
+                      trHTML = '<tr>'
+                        for (var each_letter in line){
+                          console.log(each_letter)
+                            trHTML = trHTML +'<td>' + line[each_letter] + '</td>'
+                      }
+                      trHTML += '</tr>'
+                      console.log(trHTML);
+                      $('#output_table_body').append(trHTML)
                     }
 
                   },

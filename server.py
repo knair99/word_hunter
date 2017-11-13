@@ -16,18 +16,13 @@ def index():
 #Handle post request from user here
 @app.route('/post_puzzle', methods=['POST'])
 def post_puzzle():
-	print request.form
-	print request.data
-
 	text_area_maze = request.form['maze_text_area']
 	word_maze = text_area_maze.split('\r\n') 
 	word_maze = [ ''.join(x.split()) for x in word_maze]
-	print word_maze
 	word_maze = [list(x) for x in word_maze]
 
 	text_area_words = request.form['words_text_area']
 	word_list = text_area_words.split('\r\n')
-	print word_list
 
 	#now call into solver
 	words_not_found, word_answers = wh.start(word_maze, word_list)
