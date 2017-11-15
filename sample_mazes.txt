@@ -1,0 +1,141 @@
+Sample maze 1:
+I C M I T S E V R A H T L L L
+A E R A I P O C U N R O C R O
+D L B S T U F F I N G F F C Y
+I E C U A S Y R R E B N A R C
+N B I A E N I G N R C N T O G
+F R L P G P R T E M D C F U N
+R A H N N G I W U I U F T G I
+A T O O M I O L E R R T Y E R
+E I L T F L K D G I K L U D E
+M O I N F E Y P E R I E R A H
+E N D Y E A A N M M I T Y R T
+A S A E M E D S A U R M O A A
+L M Y S I S U F T R P B S P G
+
+Words to find 1:
+AUTUMN
+FAMILY
+MAYFLOWER
+CANDIEDYAM
+CELEBRATION
+CORNUCOPIA
+CRANBERRYSAUCE
+FEAST
+FRIENDS
+GATHERING
+HARVEST
+HOLIDAY
+MAYFLOWER
+MEAL
+PARADE
+PILGRIMS
+PUMPKINPIE
+STUFFING
+TURKEY
+
+Sample maze 2:
+S  I  R  E  G  A  T  O  P  A  T  I  S  S  I  E  R  I  
+C  F  E  H  C  S  U  O  S  R  E  I  C  U  A  S  K  S  
+H  E  C  E  N  I  S  I  U  C  E  D  F  E  H  C  M  Q  
+S  H  U  D  R  A  R  E  I  S  S  I  T  O  R  E  O  E  
+O  C  I  A  X  I  G  R  I  L  L  A  R  D  I  N  L  L  
+U  G  S  G  F  E  H  C  E  V  I  T  U  C  E  X  E  L  
+S  N  I  I  L  I  N  E  C  O  O  K  E  I  R  R  C  E  
+V  I  N  R  E  S  T  A  U  R  A  N  T  U  U  E  U  V  
+I  K  I  B  G  I  S  I  D  T  T  X  Q  I  T  I  L  U  
+D  R  E  G  N  A  M  E  D  R  A  G  G  T  L  N  A  O  
+E  O  R  F  S  S  R  U  E  Y  O  B  A  H  U  O  R  N  
+M  W  N  A  C  C  A  M  R  E  I  F  F  O  C  S  E  O  
+E  N  P  R  O  F  E  S  S  I  O  N  A  L  I  S  M  I  
+R  K  O  O  C  T  S  A  F  K  A  E  R  B  R  I  A  S  
+A  Y  K  B  I  Y  M  O  N  O  R  T  S  A  G  O  C  U  
+C  A  U  E  L  B  A  N  I  A  T  S  U  S  A  P  U  F  
+L  U  R  E  G  N  A  L  U  O  B  Y  R  E  K  O  O  C  
+A  S  R  R  E  T  O  U  R  A  N  T  P  M  I  R  U  X
+
+Words to find 2:
+ABOYEUR
+AGRICULTURE
+BOULANGER
+BREAKFAST
+COOK
+BRIGADE
+CAREME
+CHEFDECUISINE
+COOKERY
+CUISINIER
+ENTREMETIER
+ESCOFFIER
+EXECUTIVE
+CHEF
+FUSION
+GARDE
+MANGER
+GASTRONOMY
+GRILLARDIN
+LINECOOK
+MOLECULAR
+NOUVELLE
+PATISSIER
+POISSONIER
+POTAGER
+PROFESSIONALISM
+RESTAURANT
+ROTISSIER
+SAUCIER
+SHORT
+ORDER
+SOUSCHEF
+SOUSVIDE
+SUSTAINABLE
+TOURANT
+WORKINGCHEF
+
+Sample maze 3:
+G  Y  P  U  Q  D  B  R  E  W  E  R  S  E
+R  A  I  S  E  L  O  I  R  O  W  A  B  N
+A  N  R  N  Y  C  U  B  S  H  S  W  L  L
+N  K  A  A  K  A  U  A  I  E  R  T  U  I
+G  E  T  I  T  S  R  T  I  S  E  M  E  Q
+E  E  E  D  N  H  E  L  L  N  G  A  J  M
+R  S  S  N  R  S  L  A  N  I  D  R  A  C
+S  O  N  I  O  I  N  E  A  W  O  I  Y  I
+X  R  I  X  H  O  I  S  T  T  D  N  S  U
+O  O  L  P  I  S  T  N  A  I  G  E  L  W
+S  E  R  T  B  R  A  V  E  S  C  R  E  U
+D  I  A  M  O  N  D  B  A  C  K  S  G  S
+E  N  M  S  E  R  D  A  P  E  U  R  N  I
+R  O  Y  A  L  S  R  E  G  I  T  O  A  R
+
+Words to find:
+ANGELS
+ASTROS
+ATHLETICS
+BLUEJAYS
+BRAVES
+BREWERS
+CARDINALS
+CUBS
+DIAMONDBACKS
+DODGERS
+GIANTS
+INDIANS
+MARINERS
+MARLINS
+METS
+NATIONALS
+ORIOLES
+PADRES
+PHILLIES
+PIRATES
+RANGERS
+RAYS
+REDSOX
+REDS
+ROCKIES
+ROYALS
+TIGERS
+TWINS
+WHITESOX
+YANKEES
