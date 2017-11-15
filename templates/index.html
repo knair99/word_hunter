@@ -51,7 +51,7 @@
               <textarea form="puzzle_form" rows="10" cols="20" name="maze_text_area" placeholder="Enter maze here" maxlength="4000" minlength="9" style="margin:0px;width:350px;height:350px;padding:2px;"></textarea>
             </div>
             <div class="col-md-6">
-              <textarea form="puzzle_form" rows="10" cols="20" name="words_text_area" placeholder="Enter words to find" maxlength="4000" minlength="9" style="margin:0px;width:350px;height:350px;padding:2px;"></textarea>
+              <textarea form="puzzle_form" rows="10" cols="20" name="words_text_area" placeholder="Enter words to find" maxlength="4000" minlength="3" style="margin:0px;width:350px;height:350px;padding:2px;"></textarea>
             </div>
           </div>
         </div>
@@ -110,6 +110,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row" id='stats_row'>
+              <div class="col-md-12">
+                <table class="table" id='stats_table'>
+                            <thead>
+                              <h4>Words not found</h4>
+                            </thead>
+                            <tbody id='stats_table_body'>
+                            </tbody>
+                          </table>
+              </div>
+            </div>
         </div>
     </div>
 
@@ -122,6 +133,8 @@
       $('#meta_table').hide();
       $('#solution_header').hide();
       $('#color_map_title').hide();
+      $('#stats_table').hide();
+      $('#stats_row').hide();
 
       //Stop form from navigating away
       $('#puzzle_form').submit(function(event){
@@ -137,8 +150,12 @@
                     $('#output_table').show();
                     $('#meta_table').show();
                     $('#color_map_title').show();
+                    $('#stats_table').show();
+                    $('#stats_row').show();
+
                     $('#output_table_body').empty();
                     $('#meta_table_body').empty();
+                    $('#stats_table_body').empty();
 
                     var words_not_found = response.words_not_found;
                     var word_answers = response.word_answers;
@@ -167,9 +184,28 @@
                       $('#meta_table_body').append(trHTML)
                     }
 
+                    //Set up diagnostics
+                    if (words_not_found.length == 0){
+                      trHTML = '<tr>'
+                      trHTML = trHTML +'<td>' + 'All words found' + '</td>'
+                      trHTML += '</tr>'
+                      $('#stats_table_body').append(trHTML)
+
+                    }
+                    else{
+                      for (var word in words_not_found){
+                        details = words_not_found[word];
+                        trHTML = '<tr>'
+                        trHTML = trHTML +'<td>' + details + '</td>'
+                        trHTML += '</tr>'
+                        $('#stats_table_body').append(trHTML)
+                    }
+                  }
+
                   },
                 error: function(error) {
-                  alert('An error occurred in your formatting - Check demo page');
+                  alert('An error occurred: ' + error.responseText['message'] + '- Check demo page');
+                  console.log(error);
                 }
 
               });//end of ajax call

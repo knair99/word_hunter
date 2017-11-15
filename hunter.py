@@ -62,12 +62,14 @@ def grid_solver(word_maze, word_list, freq_table):
 		solve_backwards = False
 		start_letter = word_to_find[0]
 		end_letter = word_to_find[-1]
-		if freq_table[start_letter]['count'] > freq_table[end_letter]['count']:
-			letter = end_letter
-			solve_backwards = True
+		if start_letter in freq_table and end_letter in freq_table:
+			if freq_table[start_letter]['count'] > freq_table[end_letter]['count']:
+				letter = end_letter
+				solve_backwards = True
+			else:
+				letter = start_letter
 		else:
-			letter = start_letter
-
+			continue
 		positions = freq_table[start_letter]['positions']
 
 		for each_position in positions:
@@ -126,6 +128,9 @@ def construct_new_maze(word_maze, word_answers):
 def start(word_maze, word_list):
 	#word_maze = get_maze_from_file('new_maze.txt')
 	#word_list = get_words_to_find_from_file('new_words.txt')
+	for each in word_maze:
+		each = [x.upper() for x in each]
+	word_list = [x.upper() for x in word_list]
 	freq_table = build_frequency_table(word_maze)
 	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
 	new_maze = construct_new_maze(word_maze, word_answers)

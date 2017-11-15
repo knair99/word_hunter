@@ -38,6 +38,8 @@ def demo():
 @app.route('/post_puzzle', methods=['POST'])
 def post_puzzle():
 	text_area_maze = request.form['maze_text_area']
+	if len(text_area_maze) == 0:
+		raise InvalidUsage('Error - fill maze up with at least one row', status_code=410)
 	word_maze = text_area_maze.split('\r\n') 
 	word_maze = [ ''.join(x.split()) for x in word_maze]
 	word_maze = [list(x) for x in word_maze]
@@ -47,6 +49,9 @@ def post_puzzle():
 		raise InvalidUsage('Error - not all columns have same length in word maze', status_code=410)
 
 	text_area_words = request.form['words_text_area']
+	if len(text_area_words) == 0:
+		raise InvalidUsage('Error - enter at least one word to find', status_code=410)
+
 	word_list = text_area_words.split('\r\n')
 	word_list = [''.join(x.split()) for x in word_list]
 	word_list = [x for x in word_list if len(x) != 0]
