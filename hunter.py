@@ -2,7 +2,7 @@ import sys
 dir_map = {'DIAG_LEFT_DOWN': (1, -1), 'RIGHT': (0, 1), 'DIAG_RIGHT_DOWN': (1, 1), 'UP': (-1, 0), 'DOWN': (1, 0), 'DIAG_RIGHT_UP': (-1, 1), 'DIAG_LEFT_UP': (-1, -1), 'LEFT': (0, -1)}
 dir_map_colors = {'DIAG_LEFT_DOWN': 'blue', 'RIGHT': 'green', 'DIAG_RIGHT_DOWN': 'yellow', 'UP': 'pink', 'DOWN': 'purple', 'DIAG_RIGHT_UP': 'gold', 'DIAG_LEFT_UP': 'red', 'LEFT': 'skyblue'}
 
-dir_map_colors_full = {'DIAGONAL LEFT DOWN': 'blue', 'RIGHT': 'green', 'DIAGONAL RIGHT DOWN': 'yellow', 'UP': 'pink', 'DOWN': 'purple', 'DIAGONAL RIGHT UP': 'gold', 'DIAGONAL LEFT UP': 'red', 'LEFT': 'skyblue'}
+dir_map_colors_full = {'DIAGONAL LEFT DOWN': 'fuchsia', 'RIGHT': 'greenyellow', 'DIAGONAL RIGHT DOWN': 'yellow', 'UP': 'pink', 'DOWN': 'orchid', 'DIAGONAL RIGHT UP': 'lightgray', 'DIAGONAL LEFT UP': 'red', 'LEFT': 'skyblue'}
 
 def build_frequency_table(word_maze):
 	freq_table = {}
