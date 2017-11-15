@@ -1,7 +1,3 @@
-'''
-Write a mini server to service word hunt challenge
-'''
-
 from flask import Flask, flash, redirect, render_template, request, session, abort, jsonify
 import json
 import hunter as wh
@@ -33,6 +29,10 @@ def handle_invalid_usage(error):
 def index():
     return render_template(
         'index.html')
+
+@app.route('/demo')
+def demo():
+	return render_template('demo.html')
 
 #Handle post request from user here
 @app.route('/post_puzzle', methods=['POST'])
