@@ -128,8 +128,11 @@ def construct_new_maze(word_maze, word_answers):
 def start(word_maze, word_list):
 	#word_maze = get_maze_from_file('new_maze.txt')
 	#word_list = get_words_to_find_from_file('new_words.txt')
+	new_word_maze = []
 	for each in word_maze:
 		each = [x.upper() for x in each]
+		new_word_maze.append(each)
+	word_maze = new_word_maze
 	word_list = [x.upper() for x in word_list]
 	freq_table = build_frequency_table(word_maze)
 	words_not_found, word_answers = grid_solver(word_maze, word_list, freq_table)
